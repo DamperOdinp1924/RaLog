@@ -1,0 +1,86 @@
+{% extends 'TBase.html' %}
+{% load static %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+{% block content %}
+
+<div class="bg-container">
+
+  <div class="image-container">
+
+    <img src="{% static 'IEntry.jpg' %}" alt="" class="iEntry">
+
+    <div class="text-overlay">
+      <div class="logocontainer">
+        <img src="{% static 'Logo.png' %}" alt="" class="Logo1">
+      </div>
+      <div class="textEntry" id="textEntry">
+        <button type="button" id="registrar" class="btn btn-primary">Registrar</button>
+        <button type="button" id="ingresar" class="btn btn-primary">Ingresar</button>
+      </div>
+      <div id="registrationForm" class="hidden">
+        <!-- Tu formulario aquí -->
+        <form action="/entry/" method="POST">
+          {% csrf_token %}
+          {{form.as_p}}
+          <button type="submit" name="registrar" class="btn btn-primary">Registrar</button>
+          {{ error }}
+        </form>
+      </div>
+      <div id="registrationFormSignin" class="hidden">
+        <!-- Tu formulario aquí -->
+        <form action="/entry/" method="POST">
+          {% csrf_token %}
+          {{form2.as_p}}
+          <button type="submit" name="ingresar" class="btn btn-primary">Ingresar</button>
+          {{ error }}
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+  // JavaScript para mostrar/ocultar el formulario al hacer clic en "Registrar"
+  document.getElementById('registrar').addEventListener('click', function () {
+    var textEntry = document.getElementById('textEntry');
+    var registrationForm = document.getElementById('registrationForm');
+
+    // Oculta el área de entrada de texto
+    textEntry.style.display = 'none';
+
+    // Muestra el formulario
+    registrationForm.style.display = 'block';
+  });
+
+  // Oculta el formulario al cargar la página
+  document.addEventListener('DOMContentLoaded', function () {
+    var registrationForm = document.getElementById('registrationForm');
+    registrationForm.style.display = 'none';
+  });
+</script>
+
+<script>
+  // JavaScript para mostrar/ocultar el formulario al hacer clic en "Registrar"
+  document.getElementById('ingresar').addEventListener('click', function () {
+    var textEntry = document.getElementById('textEntry');
+    var registrationForm = document.getElementById('registrationFormSignin');
+
+    // Oculta el área de entrada de texto
+    textEntry.style.display = 'none';
+
+    // Muestra el formulario
+    registrationForm.style.display = 'block';
+  });
+
+  // Oculta el formulario al cargar la página
+  document.addEventListener('DOMContentLoaded', function () {
+    var registrationForm = document.getElementById('registrationFormSignin');
+    registrationForm.style.display = 'none';
+  });
+</script>
+
+{% endblock %}

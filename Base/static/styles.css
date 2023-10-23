@@ -1,0 +1,149 @@
+.Angel {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.loxgos {
+  width: 170px;
+  height: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 100px;
+  margin: 0 auto;
+}
+
+/* Estilos para cada tarjeta */
+.card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+}
+
+.bg-container {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container {
+  position: relative; /* Asegura que la imagen sea relativa */
+  width: auto;
+  max-width: 1200px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.iEntry {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.overimgSupplier {
+  position: relative; /* Asegura que la imagen sea relativa */
+  width: auto;
+  max-width: 1200px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.fundSupplier {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.AirTable {
+  width: 135%;
+  margin: 0 auto; /* Esto centra el bloque horizontalmente */
+}
+
+.AirTable ul {
+  list-style: none;
+  padding: 0;
+}
+
+.AirTable li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.AirTable li strong {
+  width: 50%;
+  margin-right: auto; /* Añade un margen a la derecha del strong */
+}
+
+.vari {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 100px;
+  margin: 0 auto;
+}
+
+.overimgRates {
+  position: relative; /* Asegura que la imagen sea relativa */
+  width: auto;
+  max-width: 1200px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.imgRates {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.editar-btn {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.guardar-btn {
+  background-color: #2ecc71;
+  color: #ffffff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  /* Puedes ajustar los estilos adicionales para el botón Guardar según tus necesidades */
+}

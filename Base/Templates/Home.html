@@ -1,0 +1,53 @@
+{% extends 'TBase.html' %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+{% block content %}
+
+<div class="container-over-igm">
+
+  <img src="{% static '1.png' %}" alt="" class="Angel">
+
+  <div class="container">
+    <div class="card-container" id="card-container">
+      <div class="card q">
+        <div class="card-body">
+          <h5 class="card-title">Aeroe</h5>
+          <p class="card-text">Aqui puede generar una cotización</p>
+          <p class="card-text">Este mes se han generado</p>
+          <a href="" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <!-- Repite esta estructura para otras tarjetas -->
+      <div class="card q">
+        <div class="card-body">
+          <h5 class="card-title">Maritimo</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <div class="card q">
+        <div class="card-body">
+          <h5 class="card-title">Ground</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <div class="card q">
+        <div class="card-body">
+          <h5 class="card-title">CL</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

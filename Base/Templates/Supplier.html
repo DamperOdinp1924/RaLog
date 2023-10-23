@@ -1,0 +1,168 @@
+{% extends 'TBase.html' %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+
+
+
+{% block content %}
+
+<div class="overimgSupplier">
+  <img src="{% static '1.png' %}" alt="" class="fundSupplier">
+</div>
+
+<div class="vari">
+  <div>
+    <form action="{% url 'suppliers' %}" method="post">
+      {% csrf_token %}
+      {{ FAerolinea.as_p }}
+      <button type="submit" name="AddSupplier" class="btn btn-primary">Añadir</button>
+    </form>
+
+    <div class="AirTable">
+      <ul>
+        {% for aerolinea in VAerolineas %}
+        <li>
+          <tr>
+            <strong>{{ aerolinea.Name }}</strong>
+          </tr>
+          <form method="POST" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="Aerolinea_id" value="{{ aerolinea.id }}">
+
+            <button type="submit" name="eliminar_Aerolinea" class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div>
+    <form action="{% url 'suppliers' %}" method="post">
+      {% csrf_token %}
+      {{ FDestino.as_p }}
+      <button type="submit" name="AddDestin" class="btn btn-primary">Añadir</button>
+    </form>
+
+    <div class="AirTable">
+      <ul>
+        {% for destino in VDestins %}
+        <li>
+          <tr>
+            <strong>{{ destino.Name }}</strong>
+          </tr>
+          <form method="POST" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="Destino_id" value="{{ destino.id }}">
+
+            <button type="submit" name="eliminar_Destin" class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div>
+    <form action="{% url 'suppliers' %}" method="post">
+      {% csrf_token %}
+      {{ FOrigen.as_p }}
+      <button type="submit" name="AddOrigin" class="btn btn-primary">Añadir</button>
+    </form>
+
+    <div class="AirTable">
+      <ul>
+        {% for origen in VOrigen %}
+        <li>
+          <tr>
+            <strong>{{ origen.Name }}</strong>
+          </tr>
+          <form method="POST" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="Origen_id" value="{{ origen.id }}">
+
+            <button type="submit" name="eliminar_Origin" class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div>
+    <form action="{% url 'suppliers' %}" method="post">
+      {% csrf_token %}
+      {{ FOrigen.as_p }}
+      <button type="submit" name="AddOrigin" class="btn btn-primary">Añadir</button>
+    </form>
+
+    <div class="AirTable">
+      <ul>
+        {% for origen in VOrigen %}
+        <li>
+          <tr>
+            <strong>{{ origen.Name }}</strong>
+          </tr>
+          <form method="POST" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="Origen_id" value="{{ origen.id }}">
+
+            <button type="submit" name="eliminar_Origin" class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <form action="{% url 'suppliers' %}" method="post">
+      {% csrf_token %}
+      {{ FCarga.as_p }}
+      <button type="submit" name="addCarga" class="btn btn-primary">Añadir</button>
+    </form>
+
+    <div class="AirTable">
+      <ul>
+        {% for carga in VCarga %}
+        <li>
+          <tr>
+            <strong>{{ carga.Name }}</strong>
+          </tr>
+          <form method="POST" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="carga_id" value="{{ carga.id }}">
+
+            <button type="submit" name="eliminar_carga" class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+  // JavaScript para mostrar/ocultar el formulario al hacer clic en "Proveedores"
+  document.getElementById('Proveedorer').addEventListener('click', function (event) {
+    event.preventDefault(); // Evita que el enlace de "Proveedores" realice una recarga de página.
+
+    var cardContainer = document.getElementById('card-container');
+    var addSupplierForm = document.getElementById('AddSupplier');
+
+    // Muestra el área de entrada de texto
+    cardContainer.style.display = 'none';
+
+    // Oculta el formulario
+    addSupplierForm.style.display = 'block';
+  });
+
+  // Oculta el formulario al cargar la página
+  document.addEventListener('DOMContentLoaded', function () {
+    var addSupplierForm = document.getElementById('AddSupplier');
+    addSupplierForm.style.display = 'none';
+  });
+</script>
+
+{% endblock %}

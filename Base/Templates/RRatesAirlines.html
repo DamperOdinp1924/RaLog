@@ -1,0 +1,137 @@
+{% extends 'TBase.html' %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+{% block content %}
+<div class="overimgRates">
+  <img src="{% static '1.png' %}" alt="" class="imgRates">
+  <h1>sdjfklasjdfl</h1>
+</div>
+
+<button id="toggleForm" onclick="toggleForm()">Añadir Tarifa</button>
+
+<form id="addRatesForm" action="{% url 'ratesAir' %}" method="post" style="display: none;">
+  {% csrf_token %}
+  {{ FRates.as_p }}
+  <button type="submit" name="AddRates" class="btn btn-primary">Añadir</button>
+</form>
+
+<div class="AirTable">
+  <table id="airlinesTable">
+    <thead>
+      <tr>
+        <th>Aerolínea</th>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>kg_100</th>
+        <th>kg_300</th>
+        <th>kg_500</th>
+        <th>kg_1000</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rates in VRates %}
+      <tr id="row_{{ rates.id }}">
+        <td class="editable" data-field="Aerolineas">{{ rates.Aerolineas }}</td>
+        <td class="editable" data-field="Origen">{{ rates.Origen }}</td>
+        <td class="editable" data-field="Destino">{{ rates.Destino }}</td>
+        <td class="editable" data-field="kg_100">{{ rates.kg_100 }}</td>
+        <td class="editable" data-field="kg_300">{{ rates.kg_300 }}</td>
+        <td class="editable" data-field="kg_500">{{ rates.kg_500 }}</td>
+        <td class="editable" data-field="kg_1000">{{ rates.kg_1000 }}</td>
+        <td>
+          <button onclick="editarRegistro('{{ rates.id }}')">Editar</button>
+          <button onclick="guardarEdicion('{{ rates.id }}')" style="display:none;">Guardar</button>
+          <form method="POST" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="Rates_id" value="{{ rates.id }}">
+            <button type="submit" name="eliminar_Rates" class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<script>
+  function editarRegistro(ratesId) {
+    var fields = document.querySelectorAll('#row_' + ratesId + ' .editable');
+    fields.forEach(function (field) {
+      var value = field.innerText;
+      var input = document.createElement('input');
+      input.value = value;
+      field.innerText = '';
+      field.appendChild(input);
+      field.dataset.originalValue = value;
+    });
+
+    var guardarButton = document.querySelector('#row_' + ratesId + ' button[onclick="guardarEdicion(\'' + ratesId + '\')"]');
+    guardarButton.style.display = 'block';
+  }
+
+  function guardarEdicion(ratesId) {
+    var fields = document.querySelectorAll('#row_' + ratesId + ' .editable');
+    var formData = new FormData();
+
+    fields.forEach(function (field) {
+      var input = field.querySelector('input');
+      var value = input.value;
+      formData.append(field.dataset.field, value);
+
+      field.removeChild(input);
+      field.innerText = value;
+    });
+
+    var guardarButton = document.querySelector('#row_' + ratesId + ' button[onclick="guardarEdicion(\'' + ratesId + '\')"]');
+    guardarButton.style.display = 'none';
+
+    formData.append('Rates_id', ratesId);
+
+    fetch("{% url 'ratesAir' %}", {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Puedes manejar la respuesta si es necesario
+      })
+      .catch(error => console.error('Error:', error));
+  }
+
+  function toggleForm() {
+    var form = document.getElementById('addRatesForm');
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+    } else {
+      form.style.display = 'none';
+    }
+  }
+
+  // Inicializar DataTables con el orden por Aerolineas
+  $(document).ready(function () {
+    // Inicializar DataTables con el orden por Aerolineas
+    var table = $('#airlinesTable').DataTable({
+      order: [[0, 'asc']] // 0 es el índice de la columna Aerolineas
+    });
+
+    // Agregar un campo de búsqueda para la columna "Destino"
+    $('#airlinesTable_filter').append('<label>Destino: <input type="text" id="destinoFilter"></label>');
+
+    // Aplicar el filtro cuando se ingresa texto en el campo de búsqueda de "Destino"
+    $('#destinoFilter').keyup(function () {
+      table.column(2).search(this.value).draw(); // 2 es el índice de la columna "Destino"
+    });
+  });
+
+</script>
+
+{% endblock %}
